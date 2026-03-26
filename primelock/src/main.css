@@ -44,7 +44,7 @@
     font-weight: 600;
     color: var(--text-default);
     /* Add this line below */
-    font-family: "Valve Oracle", sans-serif; 
+    font-family: "NeonPrime reg", sans-serif; 
     order: 2;
     filter: drop-shadow(0 0 5px var(--hsl-main-color));
 }

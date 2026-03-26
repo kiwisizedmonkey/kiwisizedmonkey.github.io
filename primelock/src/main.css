@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "NeonPrime reg";
+    font-family: "NeonPrime"; /* Simplified name */
     src: url("https://kiwisizedmonkey.github.io/primelock/CriteriaCF.ttf") format("truetype");
 }
 
@@ -43,8 +43,8 @@
     font-size: 16px;
     font-weight: 600;
     color: var(--text-default);
-    /* Add this line below */
-    font-family: "NeonPrime reg", sans-serif; 
+    /* Changed to match the simplified name and added !important to bypass ClearVision defaults */
+    font-family: "NeonPrime", sans-serif !important; 
     order: 2;
     filter: drop-shadow(0 0 5px var(--hsl-main-color));
 }

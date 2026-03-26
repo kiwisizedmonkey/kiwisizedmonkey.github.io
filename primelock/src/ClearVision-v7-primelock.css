@@ -20,10 +20,10 @@
 /* SETTINGS */
 :root {
   /* ACCENT COLORS */
-  --main-color: #0ed9d1; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
-  --hover-color: #0ed9d1; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
-  --success-color: #20b977; /* positive accent color (hex, rgb or hsl) [default: #43b581] */
-  --danger-color: #b74253; /* danger accent color (hex, rgb or hsl) [default: #982929] */
+  --main-color: #d56cd5 ; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
+  --hover-color: #16c6e0; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
+  --success-color: #41f94b; /* positive accent color (hex, rgb or hsl) [default: #43b581] */
+  --danger-color: #ff0000; /* danger accent color (hex, rgb or hsl) [default: #982929] */
   
   /* STATUS COLORS */
   --online-color: #43b581; /* online status color (hex, rgb or hsl) [default: #43b581] */

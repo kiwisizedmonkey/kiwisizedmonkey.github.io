@@ -4229,3 +4229,11 @@ code {
 	--normal-text: #dcdcde;
 	--muted-text: #86868e
 }
+/* Target the channel name text */
+.name__d8e2d {
+    -webkit-text-stroke: 1px 000000; /* Uses your theme's main accent color */
+    paint-order: stroke fill;
+}
+
+/* Optional: Make the outline white or black for better contrast */
+/* -webkit-text-stroke: 1px black; */

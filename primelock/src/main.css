@@ -4230,19 +4230,18 @@ code {
 	--muted-text: #86868e
 }
 
-/* Targets the channel names in the sidebar */
-.name__d8e2d {
-    color: #e8dcbd !important; /* Forces your cream color */
+/* Target only the text inside the currently selected channel box */
+.modeSelected__d8e2d .name__d8e2d {
+    color: #e8dcbd !important;
     text-shadow: 
         -1px -1px 0 #000,  
          1px -1px 0 #000,
         -1px  1px 0 #000,
-         1px  1px 0 #000,
-         0px 0px 3px #000; /* Extra slight blur for smoothing */
-    font-weight: 600; /* Makes the font slightly thicker to help the outline pop */
+         1px  1px 0 #000 !important;
 }
 
-/* Optional: Ensures the 'Locked' or 'Rules' icons also stand out */
-.icon__d8e2d {
-    filter: drop-shadow(0 0 2px #000);
+/* This also adds the outline to the # icon and the small user/settings icons on the right */
+.modeSelected__d8e2d :is(.icon__d8e2d, .actionIcon__5861a) {
+    filter: drop-shadow(1px 1px 0 #000) drop-shadow(-1px -1px 0 #000);
+    color: #e8dcbd !important;
 }

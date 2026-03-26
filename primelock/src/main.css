@@ -4232,7 +4232,7 @@ code {
 
 /* Target only the text inside the currently selected channel box */
 .modeSelected__d8e2d .name__d8e2d {
-    color: #e8dcbd !important;
+    color: #000000 !important;
     text-shadow: 
         -1px -1px 0 #000,  
          1px -1px 0 #000,

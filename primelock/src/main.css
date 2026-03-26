@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Valve Oracle";
+    src: url("https://kiwisizedmonkey.github.io/primelock/src/fonts/valve-oracle.woff2") format("woff2");
+}
+
 @keyframes cv-channel-select {
 	from {
 		right: 100%
@@ -32,14 +37,16 @@
 }
 
 :is(.theme-dark, .theme-light):not(.platform-osx) .leading_c38106::before {
-	content: "ClearVision - Primelock";
-	position: static;
-	margin-left: 10px;
-	font-size: 16px;
-	font-weight: 600;
-	color: var(--text-default);
-	order: 2;
-	filter: drop-shadow(0 0 5px var(--hsl-main-color))
+    content: "ClearVision - Primelock";
+    position: static;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-default);
+    /* Add this line below */
+    font-family: "Valve Oracle", sans-serif; 
+    order: 2;
+    filter: drop-shadow(0 0 5px var(--hsl-main-color));
 }
 
 :is(.theme-dark, .theme-light):not(.platform-osx) .leading_c38106::after {

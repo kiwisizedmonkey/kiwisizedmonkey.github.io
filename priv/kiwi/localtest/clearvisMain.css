@@ -11,8 +11,8 @@
 /* IMPORT CSS */
 
 
-@import url("https://kiwisizedmonkey.github.io/primelock/src/main.css");
-@import url("https://kiwisizedmonkey.github.io/primelock/src/vencord.css");
+@import url("https://kiwisizedmonkey.github.io/priv/kiwi/localtest/main.css");
+@import url("https://kiwisizedmonkey.github.io/priv/kiwi/localtest/vencord.css");
 @font-face {
     font-family: "NeonPrime reg";
     src: url("https://kiwisizedmonkey.github.io/primelock/CriteriaCF.ttf") format("truetype");

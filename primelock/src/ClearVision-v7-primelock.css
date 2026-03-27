@@ -1,14 +1,15 @@
 /**
  * @name ClearVision V7 Primelock
- * @author ClearVision Team
+ * @author Kiwi
  * @version 7.0.1
- * @description Highly customizable theme for Vencord.
+ * @description Primelock theme for vencord
  * @source https://github.com/ClearVision/ClearVision-v7
  * @website https://clearvision.github.io
- * @invite dHaSxn3
+ * 
  */
 
 /* IMPORT CSS */
+
 
 @import url(https://clearvision.github.io/Addons/speech-bubbles.css);
 @import url("https://kiwisizedmonkey.github.io/primelock/src/main.css");

@@ -9,8 +9,8 @@
  */
 
 /* IMPORT CSS */
-@import url("https://kiwisizedmonkey.github.io/priv/kiwi/localtest/main.css");
-@import url("https://kiwisizedmonkey.github.io/priv/kiwi/localtest/vencord.css");
+@import url("https://kiwisizedmonkey.github.io/deadlock/hiddenking/src/discord.css");
+@import url("https://kiwisizedmonkey.github.io/deadlock/hiddenking/src/vencord.css");
 @font-face {
     font-family: "VALVE Oracle";
     src: url("https://kiwisizedmonkey.github.io/deadlock/group/valveoracle-medium.ttf") format("truetype");

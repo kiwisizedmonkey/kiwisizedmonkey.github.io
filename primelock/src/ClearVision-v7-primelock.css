@@ -10,10 +10,9 @@
 
 /* IMPORT CSS */
 
-
 @import url(https://clearvision.github.io/Addons/speech-bubbles.css);
 @import url("https://kiwisizedmonkey.github.io/primelock/src/main.css");
-@import url("https://kiwisizedmonkey.github.io/primelock/src/vencord.css");
+@import url("https://getbricked.github.io/Hyprcord/main.css");
 @font-face {
     font-family: "NeonPrime reg";
     src: url("https://kiwisizedmonkey.github.io/primelock/CriteriaCF.ttf") format("truetype");

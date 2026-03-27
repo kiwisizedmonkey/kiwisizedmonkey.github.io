@@ -1,19 +1,19 @@
 /**
- * @name ClearVision V7 deadlock 
- * @author ClearVision Team
+ * @name ClearVision V7 Hidden King 
+ * @author Kiwi
  * @version 6.7
- * @description Highly customizable theme for Vencord.
+ * @description Hidden king theme for vencord
  * @source https://github.com/ClearVision/ClearVision-v7
  * @website https://clearvision.github.io
  * @invite dHaSxn3
  */
 
 /* IMPORT CSS */
-@import url("https://clearvision.github.io/ClearVision-v7/main.css");
-@import url("https://clearvision.github.io/ClearVision-v7/vencord.css");
+@import url("https://kiwisizedmonkey.github.io/priv/kiwi/localtest/main.css");
+@import url("https://kiwisizedmonkey.github.io/priv/kiwi/localtest/vencord.css");
 @font-face {
     font-family: "VALVE Oracle";
-    src: url("https://raw.githubusercontent.com/kiwisizedmonkey/fonts/ced16e4df04f8dde5d300285fc6e953ed1073eb0/valveoracle-medium.ttf") format("truetype");
+    src: url("https://kiwisizedmonkey.github.io/deadlock/group/valveoracle-medium.ttf") format("truetype");
 }
 
 /* SETTINGS */
@@ -33,7 +33,7 @@
   
   /* APP BACKGROUND */
   --background-shading-percent: 100%; /* app background shading amount (0 for complete smoothness) [default: 100%] */
-  --background-image: url(https://raw.githubusercontent.com/kiwisizedmonkey/static_bg/main/shot_0009.jpg); /* app background image (link must be HTTPS) [default: url(https://clearvision.github.io/images/winter.jpg)]*/
+  --background-image: url(https://kiwisizedmonkey.github.io/deadlock/hiddenking/shot_0009.jpg); /* app background image (link must be HTTPS) [default: url(https://clearvision.github.io/images/winter.jpg)]*/
   --background-position: center; /* app background position [default: center] */
   --background-size: cover; /* app background size (px) [default: cover] */
   --background-attachment: fixed; /* app background attachment [default: fixed] */
@@ -118,5 +118,4 @@
   --normal-text: #dcdcde; /* text color [default: #dcdcde] */
   --muted-text: #86868e; /* muted text color [default: #86868e] */
 }
-
 /* ADD ADDITIONAL CSS BELOW HERE */

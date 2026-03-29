@@ -22,7 +22,7 @@
 :root {
   /* ACCENT COLORS */
   --main-color: #3874ae; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
-  --hover-color: #ffac11; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
+  --hover-color: #4d95db; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
   --success-color: #43b581; /* positive accent color (hex, rgb or hsl) [default: #43b581] */
   --danger-color: #db0012; /* danger accent color (hex, rgb or hsl) [default: #982929] */
   
@@ -56,7 +56,8 @@
   --user-modal-filter: var(--background-filter); /* user modal background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: var(--background-filter);] */
   
   /* HOME ICON */
-  --home-icon: url(https://clearvision.github.io/icons/discord.svg); /* home button icon (link must be HTTPS) [default: url(https://clearvision.github.io/icons/discord.svg)]*/
+  --home-icon: url(https://kiwisizedmonkey.github.io/deadlock/archmother/discord-avatar-AM.png
+); /* home button icon (link must be HTTPS) [default: url(https://clearvision.github.io/icons/discord.svg)]*/
   --home-size: cover; /* home button icon size (px) [default:cover] */
   
   /* FONTS */
@@ -121,15 +122,3 @@
   --muted-text: #86868e; /* muted text color [default: #86868e] */
 }
 /* ADD ADDITIONAL CSS BELOW HERE */
-
-/* Change Server Folder Icon to the Main Accent Color */
-[class*="folderIconWrapper"] [class*="folder"] svg,
-[class*="folderIconWrapper"] [class*="folderIcon"] {
-    color: var(--main-color) !important;
-    fill: var(--main-color) !important;
-}
-
-/* Ensure the background of the folder when open also matches */
-[class*="expandedFolderBackground"] {
-    background-color: var(--main-color) !important;
-}

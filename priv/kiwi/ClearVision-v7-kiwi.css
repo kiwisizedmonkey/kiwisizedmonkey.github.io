@@ -9,14 +9,23 @@
  */
 
 /* IMPORT CSS */
-@import url("https://clearvision.github.io/ClearVision-v7/main.css");
-@import url("https://clearvision.github.io/ClearVision-v7/vencord.css");
+@import url("https://kiwisizedmonkey.github.io/priv/kiwi/main.css");
+@import url("https://kiwisizedmonkey.github.io/priv/kiwi/vencord.css");
+
+@font-face {
+    font-family: "fancy";
+    src: url("https://kiwisizedmonkey.github.io/priv/kiwi/MacondoSwashCaps-Regular.ttf") format("truetype");
+}
+
+
+
+
 
 /* SETTINGS */
 :root {
   /* ACCENT COLORS */
-  --main-color: #a15f47; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
-  --hover-color: #6b4030; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
+  --main-color: #0a540f; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
+  --hover-color: #127c19; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
   --success-color: #43b581; /* positive accent color (hex, rgb or hsl) [default: #43b581] */
   --danger-color: #db0012; /* danger accent color (hex, rgb or hsl) [default: #982929] */
   
@@ -54,7 +63,7 @@
   --home-size: cover; /* home button icon size (px) [default:cover] */
   
   /* FONTS */
-  --main-font: "VALVE Oracle Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; /* main font for app (font must be installed) [default: gg sans, Helvetica Neue, Helvetica, Arial, sans-serif] */
+  --main-font: "fancy", "Helvetica Neue", Helvetica, Arial, sans-serif; /* main font for app (font must be installed) [default: gg sans, Helvetica Neue, Helvetica, Arial, sans-serif] */
   --code-font: Consolas, "gg mono", "Liberation Mono", Menlo, Courier, monospace; /* font for codeblocks (font must be installed) [default: Consolas, Liberation Mono, Menlo, Courier, monospace] */
   
   /* CHANNEL COLORS */
@@ -117,17 +126,4 @@
 
 /* ADD ADDITIONAL CSS BELOW HERE */
 
-
-/* Change Server Folder Icon to the Main Accent Color */
-[class*="folderIconWrapper"] [class*="folder"] svg,
-[class*="folderIconWrapper"] [class*="folderIcon"] {
-    color: var(--main-color) !important;
-    fill: var(--main-color) !important;
-}
-
-/* Ensure the background of the folder when open also matches */
-[class*="expandedFolderBackground"] {
-    background-color: var(--main-color) !important;
-}
-
-
+/* Custom Notification Badge Color */

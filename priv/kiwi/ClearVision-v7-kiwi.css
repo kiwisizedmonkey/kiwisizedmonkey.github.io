@@ -1,5 +1,5 @@
 /**
- * @name ClearVision V7 Kiwi
+ * @name ClearVision V7 Local test
  * @author ClearVision Team
  * @version 7.0.1
  * @description Highly customizable theme for Vencord.
@@ -127,3 +127,16 @@
 /* ADD ADDITIONAL CSS BELOW HERE */
 
 /* Custom Notification Badge Color */
+
+
+/* Change Server Folder Icon to the Main Accent Color */
+[class*="folderIconWrapper"] [class*="folder"] svg,
+[class*="folderIconWrapper"] [class*="folderIcon"] {
+    color: var(--main-color) !important;
+    fill: var(--main-color) !important;
+}
+
+/* Ensure the background of the folder when open also matches */
+[class*="expandedFolderBackground"] {
+    background-color: var(--main-color) !important;
+}

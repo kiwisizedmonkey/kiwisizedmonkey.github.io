@@ -9,12 +9,16 @@
  */
 
 /* IMPORT CSS */
-@import url("https://kiwisizedmonkey.github.io-priv/coco/src/main.css");
-@import url("https://kiwisizedmonkey.github.io-priv/coco/src/vencord.css");
+@import url("https://kiwisizedmonkey.github.io/priv/coco/src/main.css");
+@import url("https://kiwisizedmonkey.github.io/priv/coco/src/vencord.css");
+
+#app-mount {
+    font-size: var(--global-font-size) !important;
+}
 
 @font-face {
-    font-family: "fancy";
-    src: url("https://kiwisizedmonkey.github.io/priv/kiwi/MacondoSwashCaps-Regular.ttf") format("truetype");
+    font-family: "gamer";
+    src: url("https://kiwisizedmonkey.github.io/priv/coco/Silkscreen-Regular.ttf") format("truetype");
 }
 
 
@@ -22,8 +26,9 @@
 
 /* SETTINGS */
 :root {
+	
   /* ACCENT COLORS */
-  --main-color: #a15f47; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
+  --main-color: #FFB6C1; /* main accent color (hex, rgb or hsl) [default: #66aacc] */
   --hover-color: #6b4030; /* hover accent color (hex, rgb or hsl) [default: #1e63b3] */
   --success-color: #43b581; /* positive accent color (hex, rgb or hsl) [default: #43b581] */
   --danger-color: #db0012; /* danger accent color (hex, rgb or hsl) [default: #982929] */
@@ -37,7 +42,7 @@
   
   /* APP BACKGROUND */
   --background-shading-percent: 100%; /* app background shading amount (0 for complete smoothness) [default: 100%] */
-  --background-image: url(https://kiwisizedmonkey-priv.github.io/coco/IMG_3538.jpg); /* app background image (link must be HTTPS) [default: url(https://clearvision.github.io/images/winter.jpg)]*/
+  --background-image: url(https://kiwisizedmonkey.github.io/priv/coco/IMG_3538.jpg); /* app background image (link must be HTTPS) [default: url(https://clearvision.github.io/images/winter.jpg)]*/
   --background-position: center; /* app background position [default: center] */
   --background-size: cover; /* app background size (px) [default: cover] */
   --background-attachment: fixed; /* app background attachment [default: fixed] */
@@ -58,11 +63,11 @@
   --user-modal-filter: var(--background-filter); /* user modal background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: var(--background-filter);] */
   
   /* HOME ICON */
-  --home-icon: url(https://clearvision.github.io/icons/discord.svg); /* home button icon (link must be HTTPS) [default: url(https://clearvision.github.io/icons/discord.svg)]*/
+  --home-icon: url(https://kiwisizedmonkey.github.io/priv/coco/discord-avatar-CC.png); /* home button icon (link must be HTTPS) [default: url(https://clearvision.github.io/icons/discord.svg)]*/
   --home-size: cover; /* home button icon size (px) [default:cover] */
   
   /* FONTS */
-  --main-font: "fancy", "Helvetica Neue", Helvetica, Arial, sans-serif; /* main font for app (font must be installed) [default: gg sans, Helvetica Neue, Helvetica, Arial, sans-serif] */
+  --main-font: "gamer", "Helvetica Neue", Helvetica, Arial, sans-serif; /* main font for app (font must be installed) [default: gg sans, Helvetica Neue, Helvetica, Arial, sans-serif] */
   --code-font: Consolas, "gg mono", "Liberation Mono", Menlo, Courier, monospace; /* font for codeblocks (font must be installed) [default: Consolas, Liberation Mono, Menlo, Courier, monospace] */
   
   /* CHANNEL COLORS */
@@ -81,13 +86,13 @@
 /* THEME SPECIFIC SHADING */
 /* LIGHT THEME */
 :is(.theme-light, .theme-dark .theme-light) {
-  --background-shading: rgba(252, 252, 252, 0.3); /* app background shading color [default: rgba(252, 252, 252, 0.3)] */
-  --card-shading: rgba(252, 252, 252, 0.3); /* cards background shading color [default: rgba(252, 252, 252, 0.3)] */
-  --popout-shading: rgba(252, 252, 252, 0.7); /* popouts background shading color [default: rgba(252, 252, 252, 0.7)] */
-  --modal-shading: rgba(252, 252, 252, 0.5); /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
-  --input-shading: rgba(0, 0, 0, 0.3); /* inputs background shading color [default: rgba(0, 0, 0, 0.6)] */
-  --normal-text: #36363c; /* text color [default: #36363c] */
-  --muted-text: #75757e; /* muted text color [default: #75757e] */
+  --background-shading: rgba(243, 207, 198, 0.002); /* app background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --card-shading: rgba(0, 0, 0, 0.4); /* cards background shading color [default: rgba(0, 0, 0, 0.4)] */
+  --popout-shading: rgba(0, 0, 0, 0.8); /* popouts background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --modal-shading: rgba(0, 0, 0, 0.6); /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
+  --input-shading: rgba(255, 255, 255, 0.05); /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
+  --normal-text: #36363c; /* text color [default: #dcdcde] */
+  --muted-text: #36363c; /* muted text color [default: #86868e] */
 }
 
 /* ASH THEME */
@@ -114,15 +119,58 @@
 
 /* ONYX THEME */
 :is(.theme-midnight, .theme-light .theme-midnight) {
-  --background-shading: rgba(0, 0, 0, 0.7); /* app background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --background-shading: rgba(243, 207, 198, 0.002); /* app background shading color [default: rgba(0, 0, 0, 0.8)] */
   --card-shading: rgba(0, 0, 0, 0.4); /* cards background shading color [default: rgba(0, 0, 0, 0.4)] */
   --popout-shading: rgba(0, 0, 0, 0.8); /* popouts background shading color [default: rgba(0, 0, 0, 0.8)] */
   --modal-shading: rgba(0, 0, 0, 0.6); /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
   --input-shading: rgba(255, 255, 255, 0.05); /* inputs background shading color [default: rgba(255, 255, 255, 0.05)] */
-  --normal-text: #dcdcde; /* text color [default: #dcdcde] */
+  --normal-text: #36363c; /* text color [default: #dcdcde] */
   --muted-text: #86868e; /* muted text color [default: #86868e] */
 }
 
 /* ADD ADDITIONAL CSS BELOW HERE */
 
 /* Custom Notification Badge Color */
+/* Change Server Folder Icon to the Main Accent Color */
+[class*="folderIconWrapper"] [class*="folder"] svg,
+[class*="folderIconWrapper"] [class*="folderIcon"] {
+    color: var(--main-color) !important;
+    fill: var(--main-color) !important;
+}
+
+/* Ensure the background of the folder when open also matches */
+[class*="expandedFolderBackground"] {
+    background-color: var(--main-color) !important;
+}
+
+/* --- UNIVERSAL SIDEBAR ACTION BUTTONS --- */
+/* This targets the circles specifically by their position in the private message list */
+[class^="actionButton_"], 
+[class*=" actionButton_"],
+[aria-label="Start Message"], 
+[aria-label="More"] {
+    background-color: #1a1e2f !important; /* The Dark Blue */
+    color: var(--hsl-main-color) !important; /* The Icon Color */
+    opacity: 1 !important;
+}
+
+/* Forces the SVG icons inside to show up */
+[class^="actionButton_"] svg, 
+[aria-label="Start Message"] svg, 
+[aria-label="More"] svg {
+    color: var(--hsl-main-color) !important;
+    fill: currentColor !important;
+    width: 16px;
+    height: 16px;
+}
+
+/* This kills the default Discord hover "grey" bloop */
+[class^="actionButton_"]:hover {
+    background-color: #2a2f4a !important;
+    filter: brightness(1.3) drop-shadow(0 0 5px var(--hsl-main-color));
+}
+
+/* If they are inside a 'clickable' wrapper, force that too */
+[class^="clickable_"] [class^="actionButton_"] {
+    background-color: #1a1e2f !important;
+}

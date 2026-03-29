@@ -121,3 +121,17 @@
   --normal-text: #dcdcde; /* text color [default: #dcdcde] */
   --muted-text: #86868e; /* muted text color [default: #86868e] */
 }
+
+
+/* Change Server Folder Icon to the Main Accent Color */
+[class*="folderIconWrapper"] [class*="folder"] svg,
+[class*="folderIconWrapper"] [class*="folderIcon"] {
+    color: var(--main-color) !important;
+    fill: var(--main-color) !important;
+}
+
+/* Ensure the background of the folder when open also matches */
+[class*="expandedFolderBackground"] {
+    background-color: var(--main-color) !important;
+}
+

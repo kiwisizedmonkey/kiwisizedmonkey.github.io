@@ -59,7 +59,7 @@
   --user-modal-filter: var(--background-filter); /* user modal background adjustments (ex: blur, saturation, brightness) (more info: https://developer.mozilla.org/en-US/docs/Web/CSS/filter) [default: var(--background-filter);] */
   
   /* HOME ICON */
-  --home-icon: url(https://clearvision.github.io/icons/discord.svg); /* home button icon (link must be HTTPS) [default: url(https://clearvision.github.io/icons/discord.svg)]*/
+  --home-icon: url(https://kiwisizedmonkey.github.io/priv/kiwi/The_one_ring_animated.gif); /* home button icon (link must be HTTPS) [default: url(https://clearvision.github.io/icons/discord.svg)]*/
   --home-size: cover; /* home button icon size (px) [default:cover] */
   
   /* FONTS */
@@ -115,7 +115,7 @@
 
 /* ONYX THEME */
 :is(.theme-midnight, .theme-light .theme-midnight) {
-  --background-shading: rgba(0, 0, 0, 0.7); /* app background shading color [default: rgba(0, 0, 0, 0.8)] */
+  --background-shading: rgba(0, 0, 0, .4); /* app background shading color [default: rgba(0, 0, 0, 0.8)] */
   --card-shading: rgba(0, 0, 0, 0.4); /* cards background shading color [default: rgba(0, 0, 0, 0.4)] */
   --popout-shading: rgba(0, 0, 0, 0.8); /* popouts background shading color [default: rgba(0, 0, 0, 0.8)] */
   --modal-shading: rgba(0, 0, 0, 0.6); /* modals background shading color [default: rgba(0, 0, 0, 0.6)] */
@@ -139,4 +139,7 @@
 /* Ensure the background of the folder when open also matches */
 [class*="expandedFolderBackground"] {
     background-color: var(--main-color) !important;
+}
+[class*="childWrapper"] {
+    background-color: transparent !important;
 }

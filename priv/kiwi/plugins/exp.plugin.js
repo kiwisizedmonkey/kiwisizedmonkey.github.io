@@ -2,7 +2,7 @@
  * @name Deadlock Experimental Tracker
  * @author Kiwi
  * @description Tracks the live build version of Steam App 3488080 via the official Steam IGCVersion API. Shows daily build delta (midnight reset). WITH SOUND
- * @version 6.0.0
+ * @version 6.1.0
  */
 
 module.exports = class SteamBuildTracker {
@@ -15,7 +15,6 @@ module.exports = class SteamBuildTracker {
         this.styleEl  = null;
         this.isDragging = false;
 
-        // Runtime state
         this.lastVersion       = null;
         this.dayBaseVersion    = null;
         this.dayKey            = null;
@@ -23,9 +22,6 @@ module.exports = class SteamBuildTracker {
         this.advancedMode      = false;
         this.pos               = { x: 40, y: 100 };
         this._lastMinVersion   = null;
-
-        // Historical daily deltas: array of { date: "YYYY-MM-DD", delta: number }
-        // One entry per calendar day, never reset — grows over time
         this.dailyHistory      = [];
     }
 
@@ -79,15 +75,14 @@ module.exports = class SteamBuildTracker {
             const result = json?.result;
 
             if (result && result.success) {
-                const version    = result.active_version       != null ? Number(result.active_version)       : null;
-                const minVersion = result.min_allowed_version  != null ? Number(result.min_allowed_version)  : null;
+                const version    = result.active_version      != null ? Number(result.active_version)      : null;
+                const minVersion = result.min_allowed_version != null ? Number(result.min_allowed_version) : null;
 
                 if (version !== null) {
                     const today = this.todayKey();
 
-                    // New day — reset baseline
+                    // New day — save yesterday's delta then reset baseline
                     if (this.dayKey !== today) {
-                        // Save yesterday's final delta into history before resetting
                         if (this.dayKey && this.dayBaseVersion !== null && this.lastVersion !== null) {
                             this._upsertDailyHistory(this.dayKey, this.lastVersion - this.dayBaseVersion);
                         }
@@ -108,9 +103,9 @@ module.exports = class SteamBuildTracker {
 
                     const delta = version - this.dayBaseVersion;
 
-                    // Always upsert today's current delta into history
                     this._upsertDailyHistory(today, delta);
 
+                    // Update ATH if this delta beats the record
                     if (delta > this.allTimeHighDelta) {
                         this.allTimeHighDelta = delta;
                     }
@@ -150,17 +145,17 @@ module.exports = class SteamBuildTracker {
 
     // ─── Daily History ────────────────────────────────────────────────────────
 
-    // Insert or update the delta for a given date key
     _upsertDailyHistory(dateKey, delta) {
         const existing = this.dailyHistory.find(e => e.date === dateKey);
         if (existing) {
             existing.delta = delta;
         } else {
             this.dailyHistory.push({ date: dateKey, delta });
-            // Keep sorted by date
             this.dailyHistory.sort((a, b) => a.date.localeCompare(b.date));
         }
     }
+
+    // ─── Graph ────────────────────────────────────────────────────────────────
 
     renderGraph() {
         const canvas = this.widget && this.widget.querySelector("#sbt-graph");
@@ -184,13 +179,12 @@ module.exports = class SteamBuildTracker {
             return;
         }
 
-        // Show as many days as fit at min 14px bar width
         const maxBars = Math.floor(W / 14);
         const points  = history.slice(-maxBars);
         const n       = points.length;
 
-        const padT  = 18; // room for delta label above bar
-        const padB  = 14; // room for date label below
+        const padT  = 18;
+        const padB  = 14;
         const padLR = 4;
         const innerW = W - padLR * 2;
         const innerH = H - padT - padB;
@@ -210,32 +204,21 @@ module.exports = class SteamBuildTracker {
             const bH = delta > 0 ? Math.max(2, Math.round((delta / maxD) * innerH)) : 2;
             const y  = padT + innerH - bH;
 
-            const isATH = delta === this.allTimeHighDelta;
-
-            if (delta === 0) {
-                ctx.fillStyle = isATH ? "#f0b232" : "#1e2030"; // Neutral ATH is yellow, standard zero is dark grey
-            } else {
-                ctx.fillStyle = isATH ? "#038028" : "#ffffff"; // Positive ATH is live green, standard activity is white
-            }
-
+            // ATH bar is gold, active bars white, zero bars near-invisible
+            const isATH = delta > 0 && delta === this.allTimeHighDelta;
+            ctx.fillStyle = isATH ? "#f0b232" : (delta === 0 ? "#1e2030" : "#ffffff");
             ctx.fillRect(x, y, barW, bH);
 
-            // Delta number above bar
+            // Delta label above bar
             const label = delta === 0 ? "0" : (delta > 0 ? "+" + delta : String(delta));
             ctx.font      = "7px Consolas, monospace";
             ctx.textAlign = "center";
-
-            if (delta === 0) {
-                ctx.fillStyle = isATH ? "#f0b232" : "#2a2d33";
-            } else {
-                ctx.fillStyle = isATH ? "#038028" : "#9ba3b8";
-            }
-
+            ctx.fillStyle = isATH ? "#f0b232" : (delta === 0 ? "#2a2d33" : "#9ba3b8");
             ctx.fillText(label, x + barW / 2, Math.max(y - 2, padT - 2));
 
-            // Date label below — day number, show M/D on 1st or first bar
+            // Date label below
             const [, mm, dd] = date.split("-");
-            const dayNum   = parseInt(dd, 10);
+            const dayNum    = parseInt(dd, 10);
             const dateLabel = (dayNum === 1 || i === 0) ? `${parseInt(mm)}/${dayNum}` : String(dayNum);
             ctx.fillStyle = "#3c3f45";
             ctx.font      = "7px Consolas, monospace";
@@ -448,15 +431,15 @@ module.exports = class SteamBuildTracker {
         const advSection   = this.widget.querySelector("#sbt-advanced-section");
         const graphSection = this.widget.querySelector("#sbt-graph-section");
         const advBtn       = this.widget.querySelector("#sbt-advanced-btn");
-        if (advSection)   advSection.style.display   = this.advancedMode ? "grid" : "none";
-        if (graphSection) graphSection.style.display  = this.advancedMode ? "block" : "none";
+        if (advSection)   advSection.style.display  = this.advancedMode ? "grid"  : "none";
+        if (graphSection) graphSection.style.display = this.advancedMode ? "block" : "none";
         if (advBtn)       advBtn.classList.toggle("active", this.advancedMode);
     }
 
     setFetching() {
         const dot    = this.widget?.querySelector("#sbt-dot");
         const status = this.widget?.querySelector("#sbt-status-text");
-        if (dot)    dot.className    = "fetching";
+        if (dot)    dot.className = "fetching";
         if (status) { status.textContent = "POLLING…"; status.className = ""; }
     }
 
@@ -465,9 +448,7 @@ module.exports = class SteamBuildTracker {
         const athEl    = this.widget.querySelector("#sbt-ath");
         const minVerEl = this.widget.querySelector("#sbt-minver");
         if (athEl) {
-            athEl.textContent = this.allTimeHighDelta > 0
-            ? this.formatDelta(this.allTimeHighDelta)
-            : "±0";
+            athEl.textContent = this.formatDelta(this.allTimeHighDelta);
         }
         if (minVerEl && this._lastMinVersion != null) {
             minVerEl.textContent = String(this._lastMinVersion);
@@ -481,14 +462,12 @@ module.exports = class SteamBuildTracker {
 
         if (minVersion != null) this._lastMinVersion = minVersion;
 
-        // Status dot + label
         const dot      = this.widget.querySelector("#sbt-dot");
         const statusEl = this.widget.querySelector("#sbt-status-text");
         dot.className        = isLive ? "live" : "error";
         statusEl.textContent = status;
         statusEl.className   = isLive ? "live" : "error";
 
-        // Version
         const verEl = this.widget.querySelector("#sbt-version");
         if (isLive && version !== null) {
             verEl.textContent = String(version);
@@ -502,7 +481,6 @@ module.exports = class SteamBuildTracker {
             verEl.className   = "sbt-value placeholder";
         }
 
-        // Daily delta
         const deltaEl = this.widget.querySelector("#sbt-delta");
         if (isLive && delta !== null) {
             deltaEl.textContent = this.formatDelta(delta);
@@ -514,7 +492,6 @@ module.exports = class SteamBuildTracker {
             deltaEl.className   = "sbt-value placeholder";
         }
 
-        // Error
         const errEl = this.widget.querySelector("#sbt-error-msg");
         if (error && !isLive) {
             errEl.textContent   = error;
@@ -523,20 +500,15 @@ module.exports = class SteamBuildTracker {
             errEl.style.display = "none";
         }
 
-        // Timestamp
         const timeEl = this.widget.querySelector("#sbt-time");
         if (timeEl) timeEl.textContent = new Date().toLocaleTimeString();
 
-        // Advanced panel
         if (this.advancedMode) {
             const athEl    = this.widget.querySelector("#sbt-ath");
             const minVerEl = this.widget.querySelector("#sbt-minver");
 
-            if (athEl) {
-                athEl.textContent = this.allTimeHighDelta > 0
-                ? this.formatDelta(this.allTimeHighDelta)
-                : "±0";
-            }
+            if (athEl) athEl.textContent = this.formatDelta(this.allTimeHighDelta);
+
             if (minVerEl) {
                 if (isLive && minVersion != null) {
                     minVerEl.textContent = String(minVersion);
@@ -547,7 +519,6 @@ module.exports = class SteamBuildTracker {
                 }
             }
 
-            // Redraw graph on every update when advanced is open
             this.renderGraph();
         }
 
@@ -609,17 +580,58 @@ module.exports = class SteamBuildTracker {
         try {
             const saved = BdApi.Data.load("SteamBuildTracker", "settings");
             if (saved) {
-                if (saved.pos)                          this.pos              = saved.pos;
-                if (saved.dayKey)                       this.dayKey           = saved.dayKey;
-                if (saved.dayBaseVersion != null)       this.dayBaseVersion   = saved.dayBaseVersion;
-                if (saved.allTimeHighDelta != null)     this.allTimeHighDelta = saved.allTimeHighDelta;
-                if (saved.advancedMode != null)         this.advancedMode     = saved.advancedMode;
-                if (Array.isArray(saved.dailyHistory))  this.dailyHistory     = saved.dailyHistory;
+                if (saved.pos)                         this.pos              = saved.pos;
+                if (saved.dayKey)                      this.dayKey           = saved.dayKey;
+                if (saved.dayBaseVersion != null)      this.dayBaseVersion   = saved.dayBaseVersion;
+                if (saved.allTimeHighDelta != null)    this.allTimeHighDelta = saved.allTimeHighDelta;
+                if (saved.advancedMode != null)        this.advancedMode     = saved.advancedMode;
+                if (Array.isArray(saved.dailyHistory)) this.dailyHistory     = saved.dailyHistory;
             }
         } catch (e) { console.log("[SteamBuildTracker] Using default settings."); }
 
-        // Seed historical data from known records if history is empty
+        // Seed known historical data if no history saved yet
+        if (this.dailyHistory.length === 0) {
+            this.dailyHistory = [
+                { date: "2026-05-11", delta: 0  },
+                { date: "2026-05-12", delta: 0  },
+                { date: "2026-05-13", delta: 31 },
+                { date: "2026-05-14", delta: 0  },
+                { date: "2026-05-15", delta: 0  },
+                { date: "2026-05-16", delta: 9  },
+                { date: "2026-05-17", delta: 3  },
+                { date: "2026-05-18", delta: 6  },
+                { date: "2026-05-19", delta: 6  },
+                { date: "2026-05-20", delta: 4  },
+                { date: "2026-05-21", delta: 9  },
+                { date: "2026-05-22", delta: 18 },
+                { date: "2026-05-23", delta: 2  },
+                { date: "2026-05-24", delta: 8  },
+                { date: "2026-05-25", delta: 6  },
+                { date: "2026-05-26", delta: 0  },
+                { date: "2026-05-27", delta: 5  },
+                { date: "2026-05-28", delta: 0  },
+                { date: "2026-05-29", delta: 5  },
+                { date: "2026-05-30", delta: 0  },
+                { date: "2026-05-31", delta: 4  },
+                { date: "2026-06-01", delta: 0  },
+                { date: "2026-06-02", delta: 13 },
+                { date: "2026-06-03", delta: 15 },
+                { date: "2026-06-04", delta: 6  },
+                { date: "2026-06-05", delta: 0  },
+            ];
+        }
 
+        // Always ensure ATH is at least 36 (known record) — live data will push it higher if beaten
+        if (this.allTimeHighDelta < 36) {
+            this.allTimeHighDelta = 36;
+        }
+
+        // Seed baseline state if nothing was saved
+        if (this.dayBaseVersion === null) {
+            this.dayBaseVersion = 1783;
+            this.lastVersion    = 1783;
+            this.dayKey         = this.todayKey();
+        }
     }
 
     saveSettings() {

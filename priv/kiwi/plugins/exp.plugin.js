@@ -179,7 +179,7 @@ module.exports = class SteamBuildTracker {
             return;
         }
 
-        const maxBars = Math.floor(W / 14);
+        const maxBars = 10;
         const points  = history.slice(-maxBars);
         const n       = points.length;
 
@@ -220,7 +220,7 @@ module.exports = class SteamBuildTracker {
             const [, mm, dd] = date.split("-");
             const dayNum    = parseInt(dd, 10);
             const dateLabel = (dayNum === 1 || i === 0) ? `${parseInt(mm)}/${dayNum}` : String(dayNum);
-            ctx.fillStyle = "#3c3f45";
+            ctx.fillStyle = "#ffffff";
             ctx.font      = "7px Consolas, monospace";
             ctx.fillText(dateLabel, x + barW / 2, H - 2);
         }
@@ -233,45 +233,45 @@ module.exports = class SteamBuildTracker {
         this.styleEl.id = "steam-build-tracker-styles";
         this.styleEl.textContent = `
         #sbt-widget {
-        position: fixed;
-        width: 260px;
-        background: #0d0e10;
-        border: 1px solid #1a1c1f;
-        border-radius: 10px;
-        z-index: 99999;
-        color: #c9cdd3;
-        font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
-        font-size: 12px;
-        box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
-        overflow: hidden;
-        cursor: grab;
-        user-select: none;
-        transition: box-shadow 0.15s ease;
+            position: fixed;
+            width: 260px;
+            background: #0d0e10;
+            border: 1px solid #1a1c1f;
+            border-radius: 10px;
+            z-index: 99999;
+            color: #c9cdd3;
+            font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
+            font-size: 12px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            transition: box-shadow 0.15s ease;
         }
         #sbt-widget:hover {
-        box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 0 1px rgba(88,101,242,0.3);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 0 1px rgba(88,101,242,0.3);
         }
         #sbt-widget.dragging {
-        cursor: grabbing;
-        box-shadow: 0 24px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(88,101,242,0.5);
+            cursor: grabbing;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(88,101,242,0.5);
         }
         #sbt-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 14px 8px;
-        border-bottom: 1px solid #1a1c1f;
-        background: #111214;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px 8px;
+            border-bottom: 1px solid #1a1c1f;
+            background: #111214;
         }
         #sbt-title  { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #7114e3; text-transform: uppercase; }
         #sbt-appid  { font-size: 9px; color: #3c3f45; letter-spacing: 0.5px; }
         #sbt-status-row {
-        display: flex; align-items: center; gap: 6px;
-        padding: 8px 14px; border-bottom: 1px solid #1a1c1f;
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 14px; border-bottom: 1px solid #1a1c1f;
         }
         #sbt-dot {
-        width: 7px; height: 7px; border-radius: 50%;
-        background: #038028; flex-shrink: 0; transition: background 0.3s ease;
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #038028; flex-shrink: 0; transition: background 0.3s ease;
         }
         #sbt-dot.error    { background: #b80206; animation: none; }
         #sbt-dot.live     { background: #038028; animation: sbt-pulse 2s infinite; }
@@ -282,10 +282,10 @@ module.exports = class SteamBuildTracker {
         #sbt-status-text.live  { color: #038028; }
         #sbt-status-text.error { color: #b80206; }
         #sbt-body {
-        padding: 10px 14px 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px 12px;
+            padding: 10px 14px 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 12px;
         }
         .sbt-field { }
         .sbt-label {
@@ -308,38 +308,38 @@ module.exports = class SteamBuildTracker {
         .sbt-value.delta-ath   { color: #f0b232; }
         .sbt-value.small       { font-size: 14px; }
         #sbt-advanced-section {
-        border-top: 1px solid #1a1c1f;
-        padding: 10px 14px 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px 12px;
-        background: #0a0b0d;
+            border-top: 1px solid #1a1c1f;
+            padding: 10px 14px 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 12px;
+            background: #0a0b0d;
         }
         #sbt-graph-section {
-        border-top: 1px solid #1a1c1f;
-        padding: 10px 14px 10px;
-        background: #080909;
+            border-top: 1px solid #1a1c1f;
+            padding: 10px 14px 10px;
+            background: #080909;
         }
         #sbt-graph-label {
-        font-size: 9px; letter-spacing: 1.2px; color: #3c3f45;
-        font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
+            font-size: 9px; letter-spacing: 1.2px; color: #3c3f45;
+            font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
         }
         #sbt-graph {
-        display: block;
-        width: 100%;
-        height: 90px;
-        border-radius: 4px;
+            display: block;
+            width: 100%;
+            height: 90px;
+            border-radius: 4px;
         }
         #sbt-error-msg {
-        font-size: 10px; color: #f23f43; margin-top: 4px;
-        display: none; word-break: break-all;
-        grid-column: 1 / -1;
+            font-size: 10px; color: #f23f43; margin-top: 4px;
+            display: none; word-break: break-all;
+            grid-column: 1 / -1;
         }
         #sbt-footer {
-        padding: 6px 14px 8px;
-        border-top: 1px solid #1a1c1f;
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 6px;
+            padding: 6px 14px 8px;
+            border-top: 1px solid #1a1c1f;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 6px;
         }
         #sbt-time-label { font-size: 9px; color: #2a2d33; letter-spacing: 0.5px; }
         #sbt-time       { font-size: 9px; color: #3c3f45; }
@@ -364,47 +364,47 @@ module.exports = class SteamBuildTracker {
         this.widget.style.left = `${this.pos.x}px`;
 
         this.widget.innerHTML = `
-        <div id="sbt-header">
-        <span id="sbt-title">Experimental Tracker</span>
-        <span id="sbt-appid">APP ${this.appId}</span>
-        </div>
-        <div id="sbt-status-row">
-        <div id="sbt-dot" class="fetching"></div>
-        <span id="sbt-status-text">POLLING…</span>
-        </div>
-        <div id="sbt-body">
-        <div class="sbt-field">
-        <div class="sbt-label">Active Version</div>
-        <div class="sbt-value placeholder" id="sbt-version">—</div>
-        </div>
-        <div class="sbt-field">
-        <div class="sbt-label">Today's Delta</div>
-        <div class="sbt-value placeholder" id="sbt-delta">—</div>
-        </div>
-        <div id="sbt-error-msg"></div>
-        </div>
-        <div id="sbt-advanced-section" style="display:none">
-        <div class="sbt-field">
-        <div class="sbt-label">ATH Delta</div>
-        <div class="sbt-value delta-ath" id="sbt-ath">—</div>
-        </div>
-        <div class="sbt-field">
-        <div class="sbt-label">Min Allowed Ver</div>
-        <div class="sbt-value small placeholder" id="sbt-minver">—</div>
-        </div>
-        </div>
-        <div id="sbt-graph-section" style="display:none">
-        <div id="sbt-graph-label">Daily Version Jumps</div>
-        <canvas id="sbt-graph"></canvas>
-        </div>
-        <div id="sbt-footer">
-        <div>
-        <span id="sbt-time-label">UPDATED </span>
-        <span id="sbt-time">—</span>
-        </div>
-        <button id="sbt-advanced-btn" class="sbt-btn">ADVANCED</button>
-        <button id="sbt-refresh-btn" class="sbt-btn">↻ REFRESH</button>
-        </div>
+            <div id="sbt-header">
+                <span id="sbt-title">Experimental Tracker</span>
+                <span id="sbt-appid">APP ${this.appId}</span>
+            </div>
+            <div id="sbt-status-row">
+                <div id="sbt-dot" class="fetching"></div>
+                <span id="sbt-status-text">POLLING…</span>
+            </div>
+            <div id="sbt-body">
+                <div class="sbt-field">
+                    <div class="sbt-label">Active Version</div>
+                    <div class="sbt-value placeholder" id="sbt-version">—</div>
+                </div>
+                <div class="sbt-field">
+                    <div class="sbt-label">Today's Delta</div>
+                    <div class="sbt-value placeholder" id="sbt-delta">—</div>
+                </div>
+                <div id="sbt-error-msg"></div>
+            </div>
+            <div id="sbt-advanced-section" style="display:none">
+                <div class="sbt-field">
+                    <div class="sbt-label">ATH Delta</div>
+                    <div class="sbt-value delta-ath" id="sbt-ath">—</div>
+                </div>
+                <div class="sbt-field">
+                    <div class="sbt-label">Min Allowed Ver</div>
+                    <div class="sbt-value small placeholder" id="sbt-minver">—</div>
+                </div>
+            </div>
+            <div id="sbt-graph-section" style="display:none">
+                <div id="sbt-graph-label">Daily Version Jumps</div>
+                <canvas id="sbt-graph"></canvas>
+            </div>
+            <div id="sbt-footer">
+                <div>
+                    <span id="sbt-time-label">UPDATED </span>
+                    <span id="sbt-time">—</span>
+                </div>
+                <button id="sbt-advanced-btn" class="sbt-btn">ADVANCED</button>
+                <button id="sbt-refresh-btn" class="sbt-btn">↻ REFRESH</button>
+            </div>
         `;
 
         document.body.appendChild(this.widget);
@@ -424,7 +424,7 @@ module.exports = class SteamBuildTracker {
             if (this.advancedMode) this.renderGraph();
         });
 
-            this.setupDragging();
+        this.setupDragging();
     }
 
     _applyAdvancedVisibility() {
@@ -485,8 +485,8 @@ module.exports = class SteamBuildTracker {
         if (isLive && delta !== null) {
             deltaEl.textContent = this.formatDelta(delta);
             deltaEl.className   = delta > 0 ? "sbt-value delta-pos"
-            : delta < 0 ? "sbt-value delta-neg"
-            :             "sbt-value delta-zero";
+                                : delta < 0 ? "sbt-value delta-neg"
+                                :             "sbt-value delta-zero";
         } else {
             deltaEl.textContent = "—";
             deltaEl.className   = "sbt-value placeholder";

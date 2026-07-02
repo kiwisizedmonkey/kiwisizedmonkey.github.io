@@ -8,8 +8,8 @@
 const APP_DEFS = [
     { id: "1422450", name: "Deadlock Main",                 url: "https://api.steampowered.com/IGCVersion_1422450/GetClientVersion/v1" },
 { id: "3488080", name: "Deadlock (Experimental)", url: "https://api.steampowered.com/IGCVersion_3488080/GetClientVersion/v1" },
-{ id: "3781850", name: "Deadlock Secret",            url: "https://api.steampowered.com/IGCVersion_3781850/GetClientVersion/v1" },
-{ id: "3125160", name: "Deadlock Unknown", url: "https://api.steampowered.com/IGCVersion_3125160/GetServerVersion/v1" },
+{ id: "3781850", name: "Deadlock Canary",            url: "https://api.steampowered.com/IGCVersion_3781850/GetClientVersion/v1" },
+{ id: "3125160", name: "Deadlock NDA", url: "https://api.steampowered.com/IGCVersion_3125160/GetServerVersion/v1" },
 ];
 
 module.exports = class SteamBuildTracker {
